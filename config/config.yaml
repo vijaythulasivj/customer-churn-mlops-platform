@@ -1,0 +1,15 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  source_data_path: data/raw/customer_churn.csv
+  raw_data_path: artifacts/raw/customer_churn.csv
+
+data_validation:
+  validated_data_path: artifacts/validated/customer_churn.csv
+
+data_transformation:
+  train_data_path: artifacts/transformed/train.csv
+  test_data_path: artifacts/transformed/test.csv
+
+model_trainer:
+  model_path: models/model.pkl

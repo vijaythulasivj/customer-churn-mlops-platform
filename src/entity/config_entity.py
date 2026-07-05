@@ -14,8 +14,8 @@ class DataValidationConfig:
 
 @dataclass
 class DataTransformationConfig:
-    train_path: str = "artifacts/transformed/train.csv"
-    test_path: str = "artifacts/transformed/test.csv"
+    train_data_path: str = "artifacts/transformed/train.csv"
+    test_data_path: str = "artifacts/transformed/test.csv"
 
 
 @dataclass

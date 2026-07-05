@@ -1,0 +1,9 @@
+model:
+  algorithm: RandomForestClassifier
+
+  n_estimators: 100
+
+  random_state: 42
+
+training:
+  test_size: 0.2
