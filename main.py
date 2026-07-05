@@ -1,46 +1,23 @@
-from src.ingestion import load_data
-from src.validation import validate_data
-from src.preprocessing import preprocess
-from src.train import train_model
-from src.evaluate import evaluate
+from src.configuration.configuration import ConfigurationManager
+from src.components.data_ingestion import DataIngestion
 
 
 def main():
 
     print("=" * 60)
-    print(" Customer Churn MLOps Pipeline ")
+    print("Customer Churn MLOps Platform")
     print("=" * 60)
 
-    # Step 1 - Load Data
-    df = load_data()
+    config = ConfigurationManager()
 
-    # Step 2 - Validate Data
-    df = validate_data(df)
+    ingestion_config = config.get_data_ingestion_config()
 
-    # Step 3 - Preprocess Data
-    X_train, X_test, y_train, y_test = preprocess(df)
+    ingestion = DataIngestion(ingestion_config)
 
-    # Step 4 - Train Model
-    model = train_model(X_train, y_train)
+    ingestion.initiate_data_ingestion()
 
-    # Step 5 - Evaluate Model
-    evaluate(model, X_test, y_test)
-
-    print("\nPipeline Completed Successfully")
+    print("\nData Ingestion Completed Successfully")
 
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
