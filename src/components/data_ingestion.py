@@ -2,34 +2,32 @@ import os
 import shutil
 
 from src.logger.logger import logger
-from src.entity.config_entity import DataIngestionConfig
 
 
 class DataIngestion:
 
-    def __init__(self, config: DataIngestionConfig):
+    def __init__(self, config):
         self.config = config
 
     def initiate_data_ingestion(self):
 
         logger.info("Starting Data Ingestion")
 
-        os.makedirs(os.path.dirname(self.config.raw_data_path), exist_ok=True)
+        os.makedirs(
+            os.path.dirname(self.config.raw_data_path),
+            exist_ok=True
+        )
 
-        source_file = "data/raw/customer_churn.csv"
+        shutil.copy(
+            self.config.source_data_path,
+            self.config.raw_data_path
+        )
 
-        destination_file = self.config.raw_data_path
+        logger.info("Dataset copied successfully.")
 
-        if os.path.exists(source_file):
+        print("\n========== DATA INGESTION ==========")
+        print("Dataset copied successfully.")
+        print(f"Source      : {self.config.source_data_path}")
+        print(f"Destination : {self.config.raw_data_path}")
 
-            shutil.copy(source_file, destination_file)
-
-            logger.info("Dataset copied successfully")
-
-        else:
-
-            raise FileNotFoundError(
-                f"{source_file} not found."
-            )
-
-        return destination_file
+        return self.config.raw_data_path
