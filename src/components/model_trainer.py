@@ -24,8 +24,8 @@ class ModelTrainer:
 
         # Train model
         model = RandomForestClassifier(
-            n_estimators=100,
-            random_state=42
+            n_estimators=self.config.n_estimators,
+            random_state=self.config.random_state
         )
 
         model.fit(X_train, y_train)

@@ -1,10 +1,9 @@
-import os
+import yaml
 
 
-def create_directory(directory):
-    """
-    Create directory if it doesn't exist.
-    """
+def read_yaml(path_to_yaml: str):
 
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    with open(path_to_yaml, "r") as yaml_file:
+        content = yaml.safe_load(yaml_file)
+
+    return content

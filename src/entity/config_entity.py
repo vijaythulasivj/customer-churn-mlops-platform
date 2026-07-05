@@ -20,4 +20,6 @@ class DataTransformationConfig:
 
 @dataclass
 class ModelTrainerConfig:
-    model_path: str = "models/model.pkl"
+    model_path: str
+    n_estimators: int
+    random_state: int
