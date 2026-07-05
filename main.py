@@ -1,5 +1,4 @@
-from src.configuration.configuration import ConfigurationManager
-from src.components.data_ingestion import DataIngestion
+from src.pipeline.training_pipeline import TrainingPipeline
 
 
 def main():
@@ -8,15 +7,11 @@ def main():
     print("Customer Churn MLOps Platform")
     print("=" * 60)
 
-    config = ConfigurationManager()
+    pipeline = TrainingPipeline()
 
-    ingestion_config = config.get_data_ingestion_config()
+    pipeline.start_pipeline()
 
-    ingestion = DataIngestion(ingestion_config)
-
-    ingestion.initiate_data_ingestion()
-
-    print("\nData Ingestion Completed Successfully")
+    print("\nPipeline Executed Successfully")
 
 
 if __name__ == "__main__":
