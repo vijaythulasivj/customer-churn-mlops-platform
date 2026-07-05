@@ -3,23 +3,21 @@ from dataclasses import dataclass
 
 @dataclass
 class DataIngestionConfig:
-
+    source_data_path: str = "data/raw/customer_churn.csv"
     raw_data_path: str = "artifacts/raw/customer_churn.csv"
 
 
 @dataclass
 class DataValidationConfig:
-
-    validation_path: str = "artifacts/validated/"
+    validated_data_path: str = "artifacts/validated/customer_churn.csv"
 
 
 @dataclass
 class DataTransformationConfig:
-
-    transformed_path: str = "artifacts/transformed/"
+    train_path: str = "artifacts/transformed/train.csv"
+    test_path: str = "artifacts/transformed/test.csv"
 
 
 @dataclass
 class ModelTrainerConfig:
-
     model_path: str = "models/model.pkl"
