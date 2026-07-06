@@ -1,6 +1,5 @@
 import os
 import joblib
-import pandas as pd
 
 from sklearn.ensemble import RandomForestClassifier
 
@@ -16,13 +15,16 @@ class ModelTrainer:
 
         logger.info("Starting Model Training")
 
-        train_df = pd.read_csv(train_data_path)
+        print("\n========== MODEL TRAINING ==========")
 
-        # Target column
-        X_train = train_df.drop(columns=["Churn"])
-        y_train = train_df["Churn"]
+        # ---------------------------------
+        # Load transformed training data
+        # ---------------------------------
+        X_train, y_train = joblib.load(train_data_path)
 
-        # Train model
+        # ---------------------------------
+        # Train Random Forest Model
+        # ---------------------------------
         model = RandomForestClassifier(
             n_estimators=self.config.n_estimators,
             random_state=self.config.random_state
@@ -30,6 +32,11 @@ class ModelTrainer:
 
         model.fit(X_train, y_train)
 
+        print("RandomForest model trained successfully.")
+
+        # ---------------------------------
+        # Save trained model
+        # ---------------------------------
         os.makedirs(
             os.path.dirname(self.config.model_path),
             exist_ok=True
@@ -40,10 +47,8 @@ class ModelTrainer:
             self.config.model_path
         )
 
-        logger.info("Model saved successfully")
-
-        print("\n========== MODEL TRAINING ==========")
-        print("RandomForest model trained successfully.")
         print(f"Model saved to : {self.config.model_path}")
+
+        logger.info("Model Training Completed")
 
         return self.config.model_path

@@ -3,6 +3,7 @@ from src.entity.config_entity import (
     DataValidationConfig,
     DataTransformationConfig,
     ModelTrainerConfig,
+    MLflowConfig
 )
 
 from src.utils import read_yaml
@@ -35,20 +36,26 @@ class ConfigurationManager:
 
     def get_data_transformation_config(self):
 
-        config = self.config["data_transformation"]
 
         return DataTransformationConfig(
-            train_data_path=config["train_data_path"],
-            test_data_path=config["test_data_path"]
+            train_data_path=self.config["data_transformation"]["train_data_path"],
+            test_data_path=self.config["data_transformation"]["test_data_path"],
+            preprocessor_path=self.config["data_transformation"]["preprocessor_path"],
+            test_size=self.params["training"]["test_size"]
         )
+       
 
     def get_model_trainer_config(self):
 
-        config = self.config["model_trainer"]
-        params = self.params["model"]
-
+                
         return ModelTrainerConfig(
-            model_path=config["model_path"],
-            n_estimators=params["n_estimators"],
-            random_state=params["random_state"]
+            model_path=self.config["model_trainer"]["model_path"],
+            n_estimators=self.params["model"]["n_estimators"],
+            random_state=self.params["model"]["random_state"]
+        )
+
+    def get_mlflow_config(self):
+
+        return MLflowConfig(
+            experiment_name=self.config["mlflow"]["experiment_name"]
         )

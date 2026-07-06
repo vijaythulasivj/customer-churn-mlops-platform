@@ -8,8 +8,14 @@ data_validation:
   validated_data_path: artifacts/validated/customer_churn.csv
 
 data_transformation:
-  train_data_path: artifacts/transformed/train.csv
-  test_data_path: artifacts/transformed/test.csv
+  train_data_path: artifacts/transformed/train.pkl
+  test_data_path: artifacts/transformed/test.pkl
+  preprocessor_path: artifacts/transformed/preprocessor.pkl
 
 model_trainer:
   model_path: models/model.pkl
+  n_estimators: 100
+  random_state: 42
+
+mlflow:
+  experiment_name: customer-churn-pipeline
